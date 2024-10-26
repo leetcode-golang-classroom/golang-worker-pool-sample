@@ -1,0 +1,27 @@
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - echo "This is task cmd"
+    silent: true
+  
+  build:
+    cmds:
+      - CGO_ENABLED=0 GOOS=linux go build -o bin/main cmd/main.go
+    silent: true
+  run:
+    cmds:
+      - ./bin/main
+    deps:
+      - build
+    silent: true
+  coverage:
+    cmds:
+      - go test -v -cover ./...
+    silent: true
+  test:
+    cmds:
+      - go test -v ./...
+    silent: true
+  
